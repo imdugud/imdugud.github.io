@@ -1,0 +1,19 @@
+{
+  "name": "twitter-bot",
+  "version": "1.0.0",
+  "description": "test application",
+  "main": "app.js",
+  "scripts": {
+    "test": "'be mine'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imdugud/imdugud.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imdugud/imdugud.github.io/issues"
+  },
+  "homepage": "https://github.com/imdugud/imdugud.github.io#readme"
+}
