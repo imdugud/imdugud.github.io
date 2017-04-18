@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>canvas balls and collision example</title>
+    <style type="text/css">
+        body{
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+<p>imdugud</p>
+<canvas id="myCanvas" width="500" height="500">Canvas not supported :(</canvas>
+<script type="text/javascript">
+    var cnvs;
+    var context;
+    var CIRCLE_X = 10;
+    var CIRCLE_Y = 10;
+    var VELOCITY = 10;
+    var pathX = CIRCLE_X, pathY = CIRCLE_Y;
+    // create an empty array for shape objects
+    var myCircleArray;
+
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+
+    function init(){
+        cnvs = document.getElementById('myCanvas');
+        context = cnvs.getContext('2d');
+
+        drawMainCircle(circle, CIRCLE_X, CIRCLE_Y);
+
+        myCircleArray = new Array(10);
+        for (var i = 0; i < myCircleArray.length; i++) {
+            myCircleArray[i] = new Shape(200, 200, 10);
+        }
+
+        window.requestAnimationFrame(draw);
+    };
+
+    function circle(x, y, rds, fillColor){
+        context.beginPath();
+        context.arc(x, y, rds, 0, Math.PI*2);
+        context.fillStyle = fillColor;
+        context.fill();
+        context.stroke();
+        context.closePath();
+    };
+
+    //user controlled circle
+    function drawMainCircle(callback, x, y) {
+        callback(x, y, 10, 'green');
+    };
+
+    function draw(){
+        clearCanvas();
+        drawMainCircle(circle, pathX, pathY);
+        // iterate through every moving circle
+        for (var i = 0; i < myCircleArray.length; i++) {
+            myCircleArray[i].update();
+            myCircleArray[i].checkCollisions();
+            myCircleArray[i].draw();
+        }
+
+        window.requestAnimationFrame(draw);
+        //var dx = 3, dy = 3;
+        //callback(getRandomInt(0,500)+dx, getRandomInt(0,500)+dy, getRandomInt(10,50), 'gray');
+    }
+
+    function clearCanvas(){
+        context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+    };
+
+    ///////////KEYBOARDS////////////
+    //keyboard keys
+    var keys = new Array();
+
+    function moveSomething(evt) {
+        // store an entry for every key pressed
+        keys[evt.keyCode] = true;
+
+        switch(evt.keyCode) {
+            case 37:
+                pathX = pathX - VELOCITY;
+                //console.log('left');
+                // left key pressed
+                break;
+            case 38:
+                pathY = pathY - VELOCITY;
+                //console.log('up');
+                // up key pressed
+                break;
+            case 39:
+                pathX = pathX + VELOCITY;
+                //console.log('right');
+                // right key pressed
+                break;
+            case 40:
+                pathY = pathY + VELOCITY;
+                //console.log('down');
+                // down key pressed
+                break;
+        }
+        //evt.preventDefault();
+
+        //drawMainCircle(circle, pathX, pathY);
+    };
+
+    function keysReleased(evt) {
+        // mark keys that were released
+        keys[evt.keyCode] = false;
+    };
+    ///////////KEYBOARDS////////////
+
+    var Shape = function(xpos, ypos, csize) {
+        this.x = xpos;
+        this.y = ypos;
+        this.circleSize = csize;
+        this.xSpeed = getRandomInt(-10, 10);
+        this.ySpeed = getRandomInt(-10, 10);
+        this.update = function() {
+            this.x += this.xSpeed;
+            this.y += this.ySpeed;
+        }
+        this.checkCollisions = function() {
+            var r = this.circleSize/2;
+            if ( (this.x < r) || (this.x > context.canvas.width-r)){
+                this.xSpeed = -this.xSpeed;
+            }
+            if( (this.y < r) || (this.y > context.canvas.width-r)) {
+                this.ySpeed = -this.ySpeed;
+            }
+            var hipo = Math.floor((Math.sqrt((Math.pow((this.x - pathX), 2) + Math.pow((this.y - pathY), 2)))));
+            if ((r + 5) >= hipo) {
+                this.xSpeed = -this.xSpeed;
+                this.ySpeed = -this.ySpeed;
+            }
+        }
+        this.draw = function() {
+            circle(this.x, this.y, this.circleSize, 'red');
+        }
+    }
+
+
+    //init
+    init();
+
+    window.addEventListener('keydown', moveSomething, false);
+    window.addEventListener('keyup', keysReleased, false);
+
+</script>
+</body>
+</html>
