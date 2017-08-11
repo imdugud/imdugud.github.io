@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<label for="title">COUNT-DOWN</label>
+<input type="text" value="unnamed" id="title" name="title" required>
+<label for="hours">Hours</label>
+<input type="number" value="0" id="hours" name="hours" min="0">
+<label for="minutes">Minutes</label>
+<input type="number" value="0" id="minutes" name="minutes" min="0" max="60">
+<label for="seconds">Seconds</label>
+<input type="number" value="0" id="seconds" name="seconds" min="0" max="60">
+<button id="start-timer">START</button>
+<button id="stop-timer">STOP</button>
+
+<div id="remained-timer-view">
+
+</div>
+
+<div id="logs-list-view"></div>
+<script>
+    var logs = [];
+    var newLog = {};
+
+    var timerView = document.getElementById('remained-time-view');
+    var logsViewer = document.getElementById('logs-list-view');
+    var startBtn = document.getElementById('start-timer');
+    var stopBtn = document.getElementById('stop-timer');
+    var timeInterval;
+
+    function getData() {
+        var title = document.getElementById('title').value;
+        var hours = parseInt(document.getElementById('hours').value);
+        var minutes = parseInt(document.getElementById('minutes').value);
+        var seconds = parseInt(document.getElementById('seconds').value);
+        var logTime = timeToString(hours, minutes, seconds);
+        newLog = {title:title, time:logTime};
+        return {hours: hours, minutes: minutes, seconds: seconds};
+    }
+    function timeToString(h, m, s) {
+        return h + ':' + m + ':' + s;
+    }
+    function toMiliSeconds(hours, minutes, seconds) {
+        return ((hours * 3600) + (minutes * 60) + (seconds)) * 1000;
+    }
+    function viewTime(miliSeconds) {
+        var duration = miliSeconds / 1000;
+        var s = parseInt((duration) % 60);
+        var m = parseInt((duration / 60) % 60);
+        var h = parseInt((duration / (60*24)) % 60);
+        return h + ':' + m + ':' + s;
+    }
+    function startTimer() {
+        var data = getData();
+        var totalTime = toMiliSeconds(data.hours, data.minutes, data.seconds);
+        timeInterval = setInterval(function () {
+            totalTime = totalTime - 1000;
+            renderTimer(totalTime);
+            if (totalTime <= 0 ) {
+                stopTimer(timeInterval);
+            }
+        }, 1000);
+    }
+    function renderTimer(totalTime) {
+        timerView.innerHTML = viewTime(totalTime);
+        document.title = viewTime(totalTime);
+    }
+    function stopTimer() {
+        clearInterval(timeInterval);
+        renderTimer(0);
+        alert('Time is out');
+        logTimer();
+    }
+    function logTimer() {
+        logs.push(newLog);
+        newLog = {};
+        logsViewer.innerHTML = "";
+        logs.map(function (element) {
+            setLogElement(element);
+        });
+    }
+    function setLogElement(el){
+        var divElem = document.createElement('div');
+        logsViewer.innerHTML = logsViewer.innerHTML + element.title + ", " + element.time +"<br>";
+    }
+    //events
+    startBtn.addEventListener('click', startTimer);
+    stopBtn.addEventListener('click', stopTimer);
+    window.onbeforeunload = function() {
+        return "Dude, are you sure you want to leave? Think of the kittens!";
+    }
+</script>
+</body>
+</html>
