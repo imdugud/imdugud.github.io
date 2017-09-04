@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Distortion</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<div>
+    Image Upload:
+    <input type="file" id="imageUpload" accept="image/*" >
+    <input id="matrixInput" type="text" placeholder="insert matrix here ex: 0, -1, 0, -1, 5, -1, 0, -1, 0">
+    <button onclick="resetImage()">Reset Image</button>
+    <button onclick="customFilter()">run Filter</button>
+</div>
+<canvas id="theCanvas" width="700"></canvas>
+
+
+<script src="filter-image.js"></script>
+</body>
+</html>
