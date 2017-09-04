@@ -165,14 +165,14 @@ function setAverage() {
 function reduceColor() {
     var img = cntx.getImageData(0, 0, cntx.canvas.width, cntx.canvas.height);
     var data = img.data;
-    var reducedAmount =  32;
+    var reducedAmount =  64;
     for (var i = 0; i < data.length; i += 4) {
         var r = Math.round(data[i]/reducedAmount);
         var g = Math.round(data[i+1]/reducedAmount);
         var b = Math.round(data[i+2]/reducedAmount);
-        data[i] = r == 0 ? 0 : 255 / r;
-        data[i+1] = 255 / g;
-        data[i+2] = 255 / b;
+        data[i] = reducedAmount * r;
+        data[i+1] = reducedAmount * g;
+        data[i+2] = reducedAmount * b;
     }
     cntx.putImageData(img, 0, 0);
 }
