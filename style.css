@@ -1,20 +1,22 @@
-body{
-			margin:2em;
-			max-width: 100%;
-			display: flex;
-			font: 1.7em sans-serif;
-			flex-direction: column;
-			flex-wrap: wrap;
-			text-align: center;
-			background: #fff;
-			color: #d1d2c2;
-		}
-		a{
-			text-decoration: none;
-			color: #d1d2c2;
-			transition: all .3s;	
-		}
-		a:hover{
-			text-decoration: underline;
-			color: darkgray;
-		}
+body {
+    margin: 2em;
+    max-width: 100%;
+    display: flex;
+    font: 1.7em sans-serif;
+    flex-direction: column;
+    flex-wrap: wrap;
+    text-align: center;
+    background: #222234;
+    color: #AACCFF;
+}
+
+a {
+    text-decoration: none;
+    color: #AACCFF;
+    transition: all .3s;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #bbddff;
+}
