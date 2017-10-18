@@ -1,0 +1,10 @@
+body{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+canvas, .filter-button-list{
+    border: 1px solid black;
+}

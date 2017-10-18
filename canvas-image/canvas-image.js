@@ -93,20 +93,37 @@ function setBrightness(brightness) {
     cntx.putImageData(img, 0, 0);
 }
 
+//brightness
+function reverseColors() {
+    var img = cntx.getImageData(0, 0, cntx.canvas.width, cntx.canvas.height);
+    var data = img.data;
+    for (var i = 0; i < data.length; i += 4) {
+        // red
+        data[i] = 255 - data[i];
+        // green
+        data[i + 1] = 255 - data[i + 1];
+        // blue
+        data[i + 2] = 255 - data[i + 2];
+
+    }
+    cntx.putImageData(img, 0, 0);
+}
+
 //black and white horizontal line effect
 function setImageLineEffect(limit) {
     setThreshold(limit);
     var img = cntx.getImageData(0, 0, cntx.canvas.width, cntx.canvas.height);
     var data = img.data;
     var val = 255;
-    for (var i = 0; i < data.length; i += 4) {
-        if (i < 4) {
+    var increment = 16;
+    for (var i = 0; i < data.length; i += increment) {
+        if (i < increment) {
             continue;
         }
-        if (data[i] == data[i - 4] && data[i] != data[i + 4]) {
+        if (data[i] == data[i - increment] && data[i] != data[i + increment]) {
             setPixel(data, i, val);
         }
-        if (data[i] != data[i - 4] && data[i] == data[i + 4]) {
+        if (data[i] != data[i - increment] && data[i] == data[i + increment]) {
             setPixel(data, i, val);
         } else {
             setPixel(data, i, 0);

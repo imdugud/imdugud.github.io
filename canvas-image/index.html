@@ -3,30 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <style>
-        body{
-            display: flex;
-            flex-direction: column;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="canvas-image.css">
 </head>
 <body>
-<div class="">
-    Image Upload:
-    <input type="file" id="imageUpload" accept="image/*" >
-    <button onclick="resetImage()">Reset Image</button>
-    <button onclick="setGrayscale()">Grayscale</button>
-    <button onclick="setThreshold(127.5)">Threshold</button>
-    <button onclick="setBrightness(30)">Brightness</button>
-    <button onclick="setDotDistortion(30)">Distortion</button>
-    <button onclick="setImageLineEffect(90)">BlackLineEffect</button>
-    <button onclick="setColorShifting(5)">Color Shifting</button>
-    <button onclick="setAverage()">Average</button>
-    <button onclick="reduceColor()">Reduce Color</button>
+
+<div class="filter-button-list">
+    <input type="file" id="imageUpload" accept="image/*">
+    <div class="filter-button-item">
+        <button onclick="resetImage()">Reset Image</button>
+    </div>
+    <div class="filter-button-item">
+        <button onclick="setGrayscale()">Grayscale</button>
+    </div>
+    <div class="filter-button-item">
+        <button onclick="setThreshold(127.5)">Threshold</button>
+    </div>
+    <div class="filter-button-item">
+        <button onclick="setBrightness(30)">Brightness</button>
+    </div>
+    <div class="filter-button-item">
+        <button onclick="setDotDistortion(30)">Distortion</button>
+    </div>
+    <div class="filter-button-item">
+        <button onclick="setImageLineEffect(90)">BlackLineEffect</button>
+    </div>
+    <div class="filter-button-item">
+        <button onclick="setColorShifting(1)">Color Shifting</button>
+    </div>
+    <div class="filter-button-item">
+        <button onclick="setAverage()">Average</button>
+    </div>
+    <div class="filter-button-item">
+        <button onclick="reduceColor()">Reduce Color</button>
+    </div>
+    <div class="filter-button-item">
+        <button onclick="reverseColors()">Reverse Colors</button>
+    </div>
 </div>
+
 <canvas id="theCanvas" width="700"></canvas>
 
 
