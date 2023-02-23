@@ -1,0 +1,25 @@
+.shape {
+  display: block;
+  position: absolute;
+  /* transition: top .5s;
+  transition: left .5s; */
+}
+
+.rectangle,
+.square {
+  border: 2px solid #fff;
+  background-color: #fff;
+}
+
+.circle {
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.triangle {
+  background-image: linear-gradient(to bottom right, transparent 50%, #fff 0),
+    linear-gradient(to top right, #fff 50%, transparent 0);
+  background-size: 50% 100%;
+  background-repeat: no-repeat;
+  background-position: left, right;
+}

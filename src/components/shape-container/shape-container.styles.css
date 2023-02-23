@@ -1,0 +1,9 @@
+.shape-container{
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  background: rgb(253, 187, 45);
+  /* background: radial-gradient(circle, rgba(253, 187, 45, 1) -19%, rgba(153, 32, 227, 1) 60%); Bu alan nefes alma seysi icin kullanilabilir. */
+  background: linear-gradient(1deg, rgba(253, 187, 45, 1) -49%, rgb(198 106 255) 78%);
+  overflow: hidden;
+}
