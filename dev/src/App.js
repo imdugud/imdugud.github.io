@@ -1,14 +1,16 @@
+import { Routes, Route } from "react-router-dom";
 import { Component } from "react";
-import './App.css';
-import ShapeContainer from "./components/shape-container/shape-container.component";
+import Navigation from "./routes/navigation/navigation.component";
+import Home from "./routes/home/home.component";
+import "./App.css";
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
 
     this.state = {
-      shapes : []
-    }
+      shapes: [],
+    };
   }
 
   setShapes = () => {
@@ -29,12 +31,12 @@ class App extends Component {
       });
     }
     return arr;
-  }
+  };
 
-  componentDidMount(){
+  componentDidMount() {
     this.setState(
       () => {
-        return {shapes: this.setShapes()};
+        return { shapes: this.setShapes() };
       },
       () => {
         console.log(this.state.shapes);
@@ -44,9 +46,14 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <ShapeContainer shapes={this.state.shapes} />
-      </div>
+      <Routes>
+        <Route path="/" element={<Navigation />}>
+          <Route index element={<Home />} />
+          {/* <Route path="shapes" element={<Shapes />} />
+          <Route path="shapes" element={<Clock />} />
+          <Route path="shapes" element={<Breathe />} /> */}
+        </Route>
+      </Routes>
     );
   }
 }
