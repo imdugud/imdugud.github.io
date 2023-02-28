@@ -1,0 +1,34 @@
+// .shape-container {
+//   width: 100vw;
+//   height: 100vh;
+//   display: block;
+//   background: rgb(253, 187, 45);
+//   /* background: radial-gradient(circle, rgba(253, 187, 45, 1) -19%, rgba(153, 32, 227, 1) 60%); Bu alan nefes alma seysi icin kullanilabilir. */
+//   background: linear-gradient(1deg, rgba(253, 187, 45, 1) -49%, rgb(198 106 255) 78%);
+//   overflow: hidden;
+// }
+/* COLOR VARIABLES
+============================================= */
+$orange: #ffa600;
+$blue: #82d2e5;
+$green: #c1d72e;
+
+
+/* GRADIENT LISTS
+============================================= */
+
+$list1: $blue, $green, $orange;
+
+@mixin gradient($direction, $list) {
+  background: -webkit-linear-gradient($direction, $list);
+  background: -moz-linear-gradient($direction, $list);
+  background: -o-linear-gradient($direction, $list);
+  background: linear-gradient($direction, $list);
+}
+
+.shape-container{
+  width: 100vw;
+  height: 100vh;
+  display: inline-block;
+  background: -webkit-linear-gradient(1deg, rgba(253, 187, 45, 1) -50%, rgba(153, 32, 227, 1) 78%);
+}
